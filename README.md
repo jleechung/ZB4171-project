@@ -15,5 +15,8 @@ Methods developed for ST:
 - [Hidden Markov Random Fields for clustering expression data with spatially-coherent genes](https://www.nature.com/articles/nbt.4260)
 - [BayesSpace: resolution enhancement and clustering for ST](https://www.nature.com/articles/s41587-021-00935-2)
 
+Generative modeling for spatial data:
+- [Augmenting correlation structures in spatial data using generative models](https://arxiv.org/abs/1905.09796)
+
 ## Project Links
 - [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)

@@ -18,5 +18,27 @@ Methods developed for ST:
 Generative modeling for spatial data:
 - [Augmenting correlation structures in spatial data using generative models](https://arxiv.org/abs/1905.09796)
 
+## Code usage
+
+1. Clone the repository.
+
+```
+git clone https://github.com/jleechung/ZB4171-project
+cd ZB4171-project
+```
+
+2. Create a virtual environment. We suggest using conda - more details [here](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html). 
+
+```
+conda create --name project python=3.8
+activate project
+```
+
+3. Install requirements.
+
+```
+pip3 install -r code/requirements.txt
+```
+
 ## Project Links
 - [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)

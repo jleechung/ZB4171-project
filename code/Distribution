@@ -1,3 +1,5 @@
+install.packages("fitdistrplus")
+library("fitdistrplus")
 counts=read.csv("hypo_ani1_counts.csv")
 c<-data.matrix(counts)
 r<- round(c)  # round off the counts to nearest integer value 

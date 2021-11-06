@@ -1,0 +1,2 @@
+set.seed(4171)
+descdist(c[1,],boot=1000,discrete = TRUE)

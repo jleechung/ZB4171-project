@@ -1,8 +1,6 @@
 
 ##### Libs and functions -------------------------------------------------------
 
-setwd('C:/Users/josep/OneDrive/Desktop/Y4S1/ZB4171/assignments/Project/spatialVI/')
-
 dev.off()
 graphics.off()
 

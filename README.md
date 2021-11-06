@@ -1,7 +1,46 @@
 # ZB4171-project
 
 ## Introduction
-Spatially-resolved omics allow single-cell transriptomic profiling while retaining spatial information of cells in their native microenvironment. Integration of spatial information with gene expression data remains challenging, but could potentially yield significant biological insights into how cells function in their microenvironment. Here, we explore probabilistic generative modeling for jointly modeling expression and spatial information from spatial transcriptomics (ST) data.  
+Spatially-resolved omics allow single-cell transcriptomic profiling while retaining spatial information of cells in their native microenvironment. Integration of spatial information with gene expression data remains challenging, but could potentially yield significant biological insights into how cells function in their microenvironment. Here, we explore probabilistic generative modeling for jointly modeling expression and spatial information from spatial transcriptomics (ST) data.  
+
+## Code usage
+
+1. Clone the repository.
+
+```
+git clone https://github.com/jleechung/ZB4171-project
+cd ZB4171-project
+```
+
+2. Create a virtual environment. We suggest using conda - more details [here](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html).
+
+```
+conda create --name project python=3.8
+activate project
+```
+
+3. Install requirements.
+
+```
+pip3 install -r code/requirements.txt
+```
+
+## Running the models
+
+We implement four variants of the VAE with PyTorch and Pyro:
+
+- NBVAE: samples the parameters of the Negative Binomial distribution
+- ZINBVAE: samples the parameters of the Zero Inflated Negative Binomial distribution
+- LabelVAE: ZINB + conditioned on cell type labels
+- CVAE: ZINB + conditioned on spatial neighbors
+
+To run the models,
+
+1. Specify data, model and experiment configurations in `config.yml`
+2. Execute with `python main.py`
+
+## Project Links
+- [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)
 
 ## Related Work
 Probabilistic modeling for scRNA-seq and/or ST:
@@ -17,28 +56,3 @@ Methods developed for ST:
 
 Generative modeling for spatial data:
 - [Augmenting correlation structures in spatial data using generative models](https://arxiv.org/abs/1905.09796)
-
-## Code usage
-
-1. Clone the repository.
-
-```
-git clone https://github.com/jleechung/ZB4171-project
-cd ZB4171-project
-```
-
-2. Create a virtual environment. We suggest using conda - more details [here](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html). 
-
-```
-conda create --name project python=3.8
-activate project
-```
-
-3. Install requirements.
-
-```
-pip3 install -r code/requirements.txt
-```
-
-## Project Links
-- [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)

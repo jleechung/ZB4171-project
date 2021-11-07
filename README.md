@@ -39,6 +39,12 @@ To run the models,
 1. Specify data, model and experiment configurations in `config.yml`
 2. Execute with `python main.py`
 
+## Data sources
+
+- MERFISH mouse hypothalamus: https://datadryad.org/stash/dataset/doi:10.5061/dryad.8t8s248
+- ST mouse olfactory bulb: https://github.com/JEFworks-Lab/MERINGUE/tree/master/data
+- seqFISH+: https://github.com/CaiGroup/seqFISH-PLUS
+
 ## Project Links
 - [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)
 

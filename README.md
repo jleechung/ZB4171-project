@@ -45,9 +45,6 @@ To run the models,
 - ST mouse olfactory bulb: https://github.com/JEFworks-Lab/MERINGUE/tree/master/data
 - seqFISH+: https://github.com/CaiGroup/seqFISH-PLUS
 
-## Project Links
-- [Google drive](https://drive.google.com/drive/folders/1_L_nxCWiQm930fWjjEeX_CY6wCz41tiR)
-
 ## Related Work
 Probabilistic modeling for scRNA-seq and/or ST:
 - [SPICEMIX: Latent variable model for jointly modeling spatial information and expression for cell type inference](https://www.biorxiv.org/content/10.1101/2020.11.29.383067v2)

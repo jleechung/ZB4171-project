@@ -13,7 +13,8 @@ class SpatialDataset(Dataset):
     """ Spatial transcriptomics dataset """
 
     def __init__(self, counts_path, centroids_path, metadata_path=None,
-                 n_neighbors=20, weighted=False, label=None):
+                 n_neighbors=20, weighted=False, label=None,
+                 axes = ['Centroid_X', 'Centroid_Y']):
         """
         Args:
             counts_path (str): Path to csv file with cell counts
@@ -24,7 +25,7 @@ class SpatialDataset(Dataset):
             label (str): Name of cell class column in metadata file
         """
         self.counts = pd.read_csv(counts_path).to_numpy()
-        self.centroids = pd.read_csv(centroids_path).to_numpy()
+        self.centroids = pd.read_csv(centroids_path)[axes].to_numpy()
         assert self.centroids.shape[0] == self.counts.shape[0], \
                 'Different number of rows in counts and centroids files'
         self.n_cells = self.counts.shape[0]
@@ -124,8 +125,10 @@ class SpatialDataset(Dataset):
         return angle
 
 
-    def plot(self, pt_size = 1, pt_color = '#1f77b4'):
-        plt.scatter(self.centroids[:,0], self.centroids[:,1],
+    def plot(self, axes = ['x','y'], pt_size = 1, pt_color = '#1f77b4'):
+        axes_map = dict(x=0,y=1,z=2)
+        axes_id = [axes_map[i] for i in axes]
+        plt.scatter(self.centroids[:,axes_id[0]], self.centroids[:,axes_id[1]],
                     s = pt_size, c = pt_color)
         plt.show()
 

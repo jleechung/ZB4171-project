@@ -109,6 +109,7 @@ def cvae_evaluation(cvae, data_loader, out_dir=None, seed=42):
 
     for idx, sample in enumerate(data_loader):
         x = sample['neighbor_counts'].float()
+        assert x.shape[0] == 1, 'Batch size is not 1. Set batch size to 1 in data loader'
         n_neighbors = x.shape[1]
         n_input = x.shape[2]
         y = sample['cell_counts'].float()
@@ -125,6 +126,49 @@ def cvae_evaluation(cvae, data_loader, out_dir=None, seed=42):
                     total_count=theta,
                     logits=nb_logits,
                     gate_logits=dropout))
+        yhat = yhat.mean(dim=0).numpy()
+        recon.append(yhat)
+        sample_id.append(sample['sample_id'].numpy())
+
+    recon = np.array(recon)
+    latent = np.array(latent)
+    sample_id = np.array(sample_id).flatten()
+    recon = recon[np.argsort(sample_id)]
+    latent = latent[np.argsort(sample_id)]
+    if dir is not None:
+        latent_path = os.path.join(out_dir, 'latent.csv')
+        df1 = pd.DataFrame(latent)
+        df1.to_csv(latent_path, index = False)
+        recon_path = os.path.join(out_dir, 'recon.csv')
+        df2 = pd.DataFrame(recon)
+        df2.to_csv(recon_path, index = False)
+    return dict(latent=latent, recon=recon)
+
+def nbcvae_evaluation(cvae, data_loader, out_dir=None, seed=42):
+    pyro.set_rng_seed(seed)
+    counts = []
+    latent = []
+    recon = []
+    sample_id = []
+
+    for idx, sample in enumerate(data_loader):
+        x = sample['neighbor_counts'].float()
+        assert x.shape[0] == 1, 'Batch size is not 1. Set batch size to 1 in data loader'
+        n_neighbors = x.shape[1]
+        n_input = x.shape[2]
+        y = sample['cell_counts'].float()
+        counts.append(y[-1].mean(dim=0).numpy())
+        y = y.expand(-1, n_neighbors, -1)
+        z_mean, z_var = cvae.prior(x, y)
+        latent.append(z_mean.mean(dim=0).detach().numpy())
+        z = pyro.sample("", dist.Normal(z_mean, z_var))
+        # decode the latent code z
+        scale, theta = cvae.generation(z)
+        rate = scale * x.reshape(-1,n_input).sum(dim=1)[:,None]
+        nb_logits = (rate + 1e-4).log() - (theta + 1e-4).log()
+        yhat = pyro.sample("", dist.NegativeBinomial(
+                    total_count=theta,
+                    logits=nb_logits))
         yhat = yhat.mean(dim=0).numpy()
         recon.append(yhat)
         sample_id.append(sample['sample_id'].numpy())

@@ -31,6 +31,9 @@ COUNTS_PATH = data_params['counts_path']
 CENTROIDS_PATH = data_params['centroids_path']
 METADATA_PATH = data_params['metadata_path']
 N_NEIGHBORS = data_params['n_neighbors']
+NORM_METHOD = data_params['norm_method']
+SCALE_FACTOR = data_params['scale_factor']
+AXES = data_params['centroids'].split(',')
 
 # Experiment parameters
 exp_params = config['exp_params']
@@ -55,13 +58,22 @@ if __name__ == "__main__":
     assert pyro.__version__.startswith("1.7.0")
 
     print('Initializing dataset')
+    AXES = None if AXES == 'None' else AXES
     dset = SpatialDataset(
         counts_path=COUNTS_PATH,
         centroids_path=CENTROIDS_PATH,
         metadata_path=METADATA_PATH,
         label='Cell_class',
-        n_neighbors=N_NEIGHBORS
+        n_neighbors=N_NEIGHBORS,
+        axes=AXES
     )
+
+    NORM_METHOD = None if NORM_METHOD == 'None' else NORM_METHOD
+    if NORM_METHOD is not None:
+        print('Normalizing dataset')
+        if NORM_METHOD not in ['CountNorm', 'LogNorm']:
+            raise ValueError('Invaild normalization method')
+        dset.normalize_data(method = NORM_METHOD, scale_factor = SCALE_FACTOR)
 
     print('Initializing loaders')
     train_loader, val_loader, train_indices, val_indices = data_loader(
@@ -116,18 +128,18 @@ if __name__ == "__main__":
             use_cuda=USE_CUDA
         )
 
-    elif MODEL_NAME == 'NeighborVAE':
-        from models.neighborvae import *
-        print('Training NeighborVAE')
-        vae = NeighborVAE(
-            n_genes=n_input,
-            n_neighbors=N_NEIGHBORS,
+    elif MODEL_NAME == 'NBCVAE':
+        from models.nbcvae import *
+        print('Training NB VAE')
+        vae = CVAE(
+            n_input=n_input,
             z_dim=LATENT_DIM,
             hidden_dim1=HIDDEN_DIM1,
             hidden_dim2=HIDDEN_DIM2,
             hidden_dim3=HIDDEN_DIM3,
             use_cuda=USE_CUDA
         )
+
     elif MODEL_NAME == 'LabelVAE':
         from models.labelvae import *
         print('Training LabelVAE')

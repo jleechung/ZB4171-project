@@ -1,0 +1,27 @@
+
+model_params:
+  model_name: CVAE
+  latent_dim: 10
+  hidden_dim1: 128
+  hidden_dim2: 128
+  hidden_dim3: 128
+
+data_params:
+  counts_path: 'data/merfish/hypo_ani1_counts.csv'
+  centroids_path: 'data/merfish/hypo_ani1_cellcentroids.csv'
+  metadata_path: 'data/merfish/hypo_ani1_metadata.csv'
+  n_neighbors: 10
+  norm_method: None
+  scale_factor: 1
+
+exp_params:
+  batch_size: 32
+  train_split: 0.8
+  loss: ELBO
+  optimizer: Adam
+  learning_rate: 1.0e-3
+  num_epochs: 150
+  test_frequency: 5
+  save_frequency: 10
+  save_dir: 'checkpoints'
+  use_cuda: True

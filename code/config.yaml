@@ -11,6 +11,9 @@ data_params:
   centroids_path: 'data/merfish/hypo_ani1_cellcentroids.csv'
   metadata_path: 'data/merfish/hypo_ani1_metadata.csv'
   n_neighbors: 20
+  norm_method: None
+  scale_factor: 1
+  centroids: Centroid_X,Centroid_Y
 
 exp_params:
   batch_size: 32

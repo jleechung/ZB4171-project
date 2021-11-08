@@ -44,6 +44,6 @@ for (i in 1:length(rowOD_mature4)){
   }
 }
 }
-c[index] #to get indexes of the 20 sampled cells from the original count matrix.
+r[index,] #to get indexes of the 20 sampled cells from the original count matrix.
 
   

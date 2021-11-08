@@ -37,7 +37,7 @@ for (i in 1:length(rowOD_mature4)){
     q3=q3+1
     c=c+1
     index[c]=i
-  }else if(count4<5){
+  }else if(count4<5 & rowOD_mature4[i]>380.0){
     q4=q4+1
     c=c+1
     index[c]=i

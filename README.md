@@ -12,7 +12,7 @@ git clone https://github.com/jleechung/ZB4171-project
 cd ZB4171-project
 ```
 
-2. Create a virtual environment. We suggest using conda - more details [here](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html).
+2. Create a virtual environment.
 
 ```
 conda create --name project python=3.8
@@ -22,7 +22,7 @@ activate project
 3. Install requirements.
 
 ```
-pip3 install -r code/requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ## Running the models

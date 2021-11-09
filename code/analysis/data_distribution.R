@@ -46,4 +46,10 @@ for (i in 1:length(rowOD_mature4)){
 }
 r[index,] #to get indexes of the 20 sampled cells from the original count matrix.
 
-  
+install.packages(matrixStats)        
+library(matrixStats)
+Mean<-colMeans(r)
+Variance<-(colSds(r))^2
+plot(log2(Mean+1), log2(Variance+1),pch=19, cex=0.5)
+abline(a=0,b=1,lty=3,col=2)
+ 

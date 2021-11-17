@@ -61,17 +61,6 @@ for (i in 1:nrow(r)) {
 plot(y=ll_pois, x=ll_nbinom,pch=19,cex=0.5,col=rgb(0,0,0,0.5))
 abline(a=0,b=1,col=2)
 
-AIC_nbinom<-rep(NA, nrow(r))
-AIC_pois<-rep(NA, nrow(r))
-for (i in 1:nrow(r)) {
-  if (i %% 100 == 0) message('Iteration ', i)
-  fit_nbinom <- fitdist(r[i,],'nbinom')
-  fit_pois <- fitdist(r[i,],'pois')
-  AIC_nbinom[i] <- summary(fit_nbinom)[[7]]
-  AIC_pois[i] <- summary(fit_pois)[[7]]
-}
-plot(y=AIC_pois, x=AIC_nbinom,pch=19,cex=0.5,col=rgb(0,0,0,0.5))
-abline(a=0,b=1,col=2)
 
 BIC_nbinom<-rep(NA, nrow(r))                                                  
 BIC_pois<-rep(NA, nrow(r))

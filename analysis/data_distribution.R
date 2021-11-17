@@ -13,7 +13,7 @@ qqcomp(r5424, legendtext = plot.legend)
 cdfcomp(r5424, legendtext = plot.legend)
 ppcomp(r5424, legendtext = plot.legend)
 
-R=read.csv("hypo_ani1_counts.csv1")            #csv with cell_class column from metadata added.
+R=read.csv("hypo_ani1_counts1.csv")            #csv with cell_class column from metadata added.
 ODMature4<-subset(R,Cell_class=="OD Mature 4") 
 ODMature4<-subset(ODMature4,select=-c(Cell_class))
 ODMature1<-subset(R,Cell_class=="OD Mature 1") 
